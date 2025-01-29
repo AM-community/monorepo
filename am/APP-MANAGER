@@ -1353,7 +1353,10 @@ case "$1" in
 		echo "$DIVIDING_LINE"
 		exit 0
 		;;
-	# EXTERNAL OPTIONS / MODULES
+	'--gui')
+		MODULE="gui.am"
+		_use_module "$@"
+		;;
 	'about'|'-a'|\
 	'files'|'-f'|'-fi'|\
 	'list'|'-l'|\
