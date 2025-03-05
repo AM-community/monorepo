@@ -1464,7 +1464,15 @@ case "$1" in
 	'version'|'-v'|'--version')
 		echo "$AMVERSION"
 		;;
-	'help'|'-h')
+	'--disable-notifications')
+		_determine_args
+		for n in $ARGPATHS; do sed -e '/notify-send/ s/^#*/#/' -i "$n/AM-updater" 2>/dev/null; done
+		;;
+	'--enable-notifications')
+		_determine_args
+		for n in $ARGPATHS; do sed -e '/notify-send/ s/^#*//' -i "$n/AM-updater" 2>/dev/null; done
+		;;
+	'help'|'-h'|'--help')
 		################################################################################################################################################################
 		#				HELP
 		################################################################################################################################################################
