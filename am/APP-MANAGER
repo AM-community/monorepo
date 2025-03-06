@@ -1356,7 +1356,7 @@ case "$1" in
 		exit 0
 		;;
 	'--gui')
-		MODULE="gui.am"
+		MODULE="yad.am"
 		_use_module "$@"
 		;;
 	'about'|'-a'|\
