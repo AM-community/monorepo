@@ -12,6 +12,14 @@ Come and help us translate AM to *your* language
 - workflows
 - github (organization readme)
 
+Come and join our effort
+# ⭐ to make AppImages even better 🚀
+
+### To check development, fill issues, pull requests or discussions please use
+
+# [monorepo](https://github.com/AM-community/monorepo)
+From here is everything else automagicaly updated
+
 We got a :star: from [@Eloitor](https://github.com/Eloitor)
 
 We got a :star: from [@zen0bit](https://github.com/zen0bit)
