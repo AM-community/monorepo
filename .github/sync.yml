@@ -74,3 +74,12 @@ group:
       dest: .github/workflows/to-weblate.yml
     repos: |
       am-community/AM@main
+
+  - files:
+    - source: LICENSE
+      dest: LICENSE
+    repos: |
+      am-community/.github@main
+      am-community/localization@main
+      am-community/workflows@main
+      am-community/checks@main
