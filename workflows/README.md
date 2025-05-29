@@ -26,7 +26,7 @@ aka
 Come and join our effort
 # ⭐ to make AppImages even better 🚀
 
-### Any issues, pull requests or discussions please post in
+### To check development, fill issues, pull requests or discussions please use
 
 # [monorepo](https://github.com/AM-community/monorepo)
 From there is this repository automagicaly updated by bot
