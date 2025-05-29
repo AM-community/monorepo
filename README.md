@@ -8,6 +8,7 @@ And will be automaticaly synced to individual repositories under this organizati
 - localization
 
 Come and help us translate AM to *your* language
+# For now in testing mode
 [![Stav překladu](https://hosted.weblate.org/widget/am/am/open-graph.png)](https://hosted.weblate.org/engage/am/)
 - workflows
 - github (organization readme)
