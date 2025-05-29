@@ -18,6 +18,7 @@ env:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   create-sync:
@@ -26,18 +27,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@main
-
-      - name: 🛰️ LICENSE
-        run: |
-          echo '' >> .github/sync.yml
-          echo '  - files:' >> .github/sync.yml
-          echo "    - source: LICENSE" >> .github/sync.yml
-          echo "      dest: LICENSE" >> .github/sync.yml
-          echo '    repos: |' >> .github/sync.yml
-          echo "      - am-community/.github@main" >> .github/sync.yml
-          echo "      - am-community/localization@main" >> .github/sync.yml
-          echo "      - am-community/workflows@main" >> .github/sync.yml
-          echo "      - am-community/checks@main" >> .github/sync.yml
 
       - name: 🛰️ am
         run: |
@@ -119,7 +108,19 @@ jobs:
           echo '    repos: |' >> .github/sync.yml
           echo "      am-community/AM@main" >> .github/sync.yml
 
-      - name: push
+      - name: 🛰️ LICENSE
+        run: |
+          echo '' >> .github/sync.yml
+          echo '  - files:' >> .github/sync.yml
+          echo "    - source: LICENSE" >> .github/sync.yml
+          echo "      dest: LICENSE" >> .github/sync.yml
+          echo '    repos: |' >> .github/sync.yml
+          echo "      am-community/.github@main" >> .github/sync.yml
+          echo "      am-community/localization@main" >> .github/sync.yml
+          echo "      am-community/workflows@main" >> .github/sync.yml
+          echo "      am-community/checks@main" >> .github/sync.yml
+
+      - name: 🛰️ push
         run: |
           git config --global user.name web-flow
           git config --global user.email "noreply@github.com"
