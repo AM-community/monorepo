@@ -93,6 +93,15 @@ jobs:
           echo '    repos: |' >> .github/sync.yml
           echo "      ${owner}/${sync}@${branch}" >> .github/sync.yml
 
+      - name: 🛰️ to-weblate.yml
+        run: |
+          echo '' >> .github/sync.yml
+          echo '  - files:' >> .github/sync.yml
+          echo "    - source: workflows/to-weblate.yml" >> .github/sync.yml
+          echo "      dest: .github/workflows/to-weblate.yml" >> .github/sync.yml
+          echo '    repos: |' >> .github/sync.yml
+          echo "      am-community/AM@main" >> .github/sync.yml
+
       - name: push
         run: |
           git config --global user.name web-flow
