@@ -56,6 +56,8 @@ group:
       dest: source.po
     - source: localization/source.pot
       dest: source.pot
+    - source: localization/sr.po
+      dest: sr.po
     - source: localization/usr
       dest: usr
     repos: |
