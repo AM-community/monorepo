@@ -6,5 +6,8 @@ And will be automaticaly synced to individual repositories under this organizati
 
 - AM
 - localization
+
+Come and help us translate AM to *your* language
+[![Stav překladu](https://hosted.weblate.org/widget/am/am/open-graph.png)](https://hosted.weblate.org/engage/am/)
 - workflows
 - github (organization readme)
