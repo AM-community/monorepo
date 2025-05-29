@@ -4,14 +4,15 @@ Everything will happen in this repo
 
 And will be automaticaly synced to individual repositories under this organization
 
-- AM
-- localization
+- [AM](https://github.com/AM-community/am)
+- [localization](https://github.com/AM-community/localization)
 
 Come and help us translate AM to *your* language
 # For now in testing mode
 [![Stav překladu](https://hosted.weblate.org/widget/am/am/open-graph.png)](https://hosted.weblate.org/engage/am/)
-- workflows
-- github (organization readme)
+- [workflows](https://github.com/AM-community/workflows)
+- [checks](https://github.com/AM-community/checks)
+- [github](https://github.com/AM-community/.github) (organization readme)
 
 Come and join our effort
 # ⭐ to make AppImages even better 🚀
