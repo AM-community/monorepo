@@ -1,0 +1,76 @@
+group:
+  - files:
+    - source: am/AM-INSTALLER
+      dest: AM-INSTALLER
+    - source: am/APP-MANAGER
+      dest: APP-MANAGER
+    - source: am/CONTRIBUTING.md
+      dest: CONTRIBUTING.md
+    - source: am/INSTALL
+      dest: INSTALL
+    - source: am/LICENSE
+      dest: LICENSE
+    - source: am/README.md
+      dest: README.md
+    - source: am/appimage-bulder-scripts
+      dest: appimage-bulder-scripts
+    - source: am/docs
+      dest: docs
+    - source: am/modules
+      dest: modules
+    - source: am/programs
+      dest: programs
+    - source: am/sample
+      dest: sample
+    - source: am/templates
+      dest: templates
+    - source: am/tools
+      dest: tools
+    repos: |
+      am-community/am@main
+
+  - files:
+    - source: github/README.md
+      dest: README.md
+    - source: github/profile
+      dest: profile
+    repos: |
+      am-community/.github@main
+
+  - files:
+    - source: localization/LINGUAS
+      dest: LINGUAS
+    - source: localization/README.md
+      dest: README.md
+    - source: localization/cs.po
+      dest: cs.po
+    - source: localization/de.po
+      dest: de.po
+    - source: localization/es.po
+      dest: es.po
+    - source: localization/it.po
+      dest: it.po
+    - source: localization/ru.po
+      dest: ru.po
+    - source: localization/source.po
+      dest: source.po
+    - source: localization/source.pot
+      dest: source.pot
+    - source: localization/usr
+      dest: usr
+    repos: |
+      am-community/localization@main
+
+  - files:
+    - source: workflows/README.md
+      dest: README.md
+    - source: workflows/to-weblate.yml
+      dest: to-weblate.yml
+    repos: |
+      am-community/workflows@main
+
+  - files:
+    - source: workflows/to-weblate.yml
+      dest: .github/workflows/to-weblate.yml
+    repos: |
+      am-community/AM@main
