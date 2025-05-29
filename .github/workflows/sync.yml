@@ -22,6 +22,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@main
 
+      - name: 🛰️ LICENSE
+        run: |
+          echo '' >> .github/sync.yml
+          echo '  - files:' >> .github/sync.yml
+          echo "    - source: LICENSE" >> .github/sync.yml
+          echo "      dest: LICENSE" >> .github/sync.yml
+          echo '    repos: |' >> .github/sync.yml
+          echo "      am-community/.github@main" >> .github/sync.yml
+          echo "      am-community/localization@main" >> .github/sync.yml
+          echo "      am-community/workflows@main" >> .github/sync.yml
+          echo "      am-community/checks@main" >> .github/sync.yml
+
       - name: 🛰️ am
         run: |
           sync=am
