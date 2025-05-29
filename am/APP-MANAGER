@@ -1376,7 +1376,9 @@ case "$1" in
 		_use_module "$@"
 		;;
 	'translate'|'--translate')
-		_use_translate "$@"
+		MODULE="translate.am"
+		_online_check
+		_use_module "$@"
 		;;
 	# INBUILT OPTIONS
 	'apikey')
