@@ -23,3 +23,5 @@ From here is everything else automagicaly updated
 We got a :star: from [@Eloitor](https://github.com/Eloitor)
 
 We got a :star: from [@zen0bit](https://github.com/zen0bit)
+
+We got a :star: from [@ivan-hc](https://github.com/ivan-hc)
