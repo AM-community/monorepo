@@ -59,10 +59,10 @@ jobs:
           TRANSLATOR_EMAIL="john.doe@example.com"
           touch temp.po
           cat <<-HEREDOC >> temp.po
-          # File with translation for AM
-          # FIRST AUTHOR <EMAIL@ADDRESS>, $(date +"%Y")
-          msgid ""
-          msgstr ""
+          "# File with translation for AM\n"
+          "# FIRST AUTHOR <EMAIL@ADDRESS>, $(date +"%Y")\n"
+          "msgid \"\""
+          "msgstr \"\""
           "Project-Id-Version: ${PACKAGE_NAME} ${PACKAGE_VERSION}\n"
           "Report-Msgid-Bugs-To: https://github.com/ivan-hc/AM\n"
           "POT-Creation-Date: $(date +"%Y-%m-%d")\n"
