@@ -12,4 +12,6 @@ Come and help us translate AM to *your* language
 - workflows
 - github (organization readme)
 
+We got a :star: from [@Eloitor](https://github.com/Eloitor)
+
 We got a :star: from [@zen0bit](https://github.com/zen0bit)
