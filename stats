@@ -1,16 +1,16 @@
 Jak v názvu souboru, tak v obsahu je možné použít značkovací jazyk šablon Django, například:
 
-Czech
+Spanish
 Název jazyka
-cs
+es
 Kód jazyka
-99.0
+100.0
 Procent přeloženo
-330
+0
 Počet řetězců
-327
+0
 Počet přeložených řetězců
-localization/cs.po
+localization/es.po
 Jméno souboru s překladem
 am
 Název součásti
