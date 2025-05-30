@@ -25,7 +25,44 @@ jobs:
     name: 🛰️ sync
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+
+      - name: Checkout am
+        uses: actions/checkout@main
+        with:
+          repository: am-community/am
+      - name: clean
+        run: |
+          rm -rf *
+          git add .
+
+      - name: Checkout .github
+        uses: actions/checkout@main
+        with:
+          repository: am-community/.github
+      - name: clean
+        run: |
+          rm -rf *
+          git add .
+
+      - name: Checkout localization
+        uses: actions/checkout@main
+        with:
+          repository: am-community/localization
+      - name: clean
+        run: |
+          rm -rf *
+          git add .
+
+      - name: Checkout workflows
+        uses: actions/checkout@main
+        with:
+          repository: am-community/workflows
+      - name: clean
+        run: |
+          rm -rf *
+          git add .
+
+      - name: Checkout
         uses: actions/checkout@main
 
       - name: 🛰️ am
