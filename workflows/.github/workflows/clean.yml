@@ -1,4 +1,4 @@
-name: "Add Changes to Branch"
+name: recreate clean-main
 
 on:
   repository_dispatch:
@@ -14,8 +14,8 @@ permissions:
   contents: write
 
 env:
-  REPO: ${{ github.repository_owner }}/AM
-  BRANCH: main-clean
+  REPO: ${{ github.repository_owner }}/monorepo
+  BRANCH: clean-main
 
 jobs:
   add-changes-to-branch:
