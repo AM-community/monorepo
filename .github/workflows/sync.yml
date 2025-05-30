@@ -99,12 +99,12 @@ jobs:
           echo '    repos: |' >> .github/sync.yml
           echo "      ${owner}/${sync}@${branch}" >> .github/sync.yml
 
-      - name: 🛰️ to-weblate.yml
+      - name: 🛰️ extract-strings.yml
         run: |
           echo '' >> .github/sync.yml
           echo '  - files:' >> .github/sync.yml
-          echo "    - source: workflows/to-weblate.yml" >> .github/sync.yml
-          echo "      dest: .github/workflows/to-weblate.yml" >> .github/sync.yml
+          echo "    - source: workflows/extract-strings.yml" >> .github/sync.yml
+          echo "      dest: .github/workflows/extract-strings.yml" >> .github/sync.yml
           echo '    repos: |' >> .github/sync.yml
           echo "      am-community/AM@main" >> .github/sync.yml
 
