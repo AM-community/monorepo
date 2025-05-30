@@ -50,8 +50,6 @@ group:
       dest: es.po
     - source: localization/it.po
       dest: it.po
-    - source: localization/readme.po
-      dest: readme.po
     - source: localization/ru.po
       dest: ru.po
     - source: localization/source.po
