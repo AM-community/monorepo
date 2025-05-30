@@ -66,8 +66,8 @@ group:
   - files:
     - source: workflows/README.md
       dest: README.md
-    - source: workflows/to-weblate.yml
-      dest: to-weblate.yml
+    - source: workflows/extract-strings.yml
+      dest: extract-strings.yml
     repos: |
       am-community/workflows@main
 
