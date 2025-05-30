@@ -72,8 +72,8 @@ group:
       am-community/workflows@main
 
   - files:
-    - source: workflows/to-weblate.yml
-      dest: .github/workflows/to-weblate.yml
+    - source: workflows/extract-strings.yml
+      dest: .github/workflows/extract-strings.yml
     repos: |
       am-community/AM@main
 
