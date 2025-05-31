@@ -16,7 +16,7 @@ organization
 
 @For [@AM](https://github.com/ivan-hc/AM) #projekt
 # Zasada @in @testing @mode
-#Doći a #pomoć @u #prevoditi @AM #na [@X33@X]#tvoj[@X38@X] #jezik
+Doći a pomoć u prevoditi AM na tvoj jezik
 
 [![Localization
 #Stanje](https://hosted.weblate.org/widget/am/am/open-graph.png)](https://hosted.weblate.org/engage/am/)
