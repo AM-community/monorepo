@@ -1355,10 +1355,7 @@ case "$1" in
 		echo "   and help us catch the bugs please"
 		exit 0
 		;;
-	'--gui')
-		MODULE="yad.am"
-		_use_module "$@"
-		;;
+	# EXTERNAL OPTIONS / MODULES
 	'about'|'-a'|\
 	'files'|'-f'|'-fi'|\
 	'list'|'-l'|\
@@ -1400,6 +1397,10 @@ case "$1" in
 		;;
 	'translate'|'--translate')
 		_use_translate "$@"
+		;;
+	'--gui')
+		MODULE="yad.am"
+		_use_module "$@"
 		;;
 	# INBUILT OPTIONS
 	'apikey')
