@@ -1,6 +1,6 @@
-Show in [Czech](README-cs.md), [English](README.md), [German](README-de.md),
-[Spanish](README-es.md), [Italian](README-it.md), [Russian](README-ru.md) or
-[Serbian](README-sr.md) language
+[Чешский](README-cs.md), [English](README.md), [немецкий](README-de.md),
+[испанский](README-es.md), [итальянский](README-it.md), [русский]{6 or или
+[сербский](README-sr.md)
 
 # Это основной репозиторий развития
 
