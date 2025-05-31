@@ -1,6 +1,6 @@
-Show in [Czech](README-cs.md), [English](README.md), [German](README-de.md),
-[Spanish](README-es.md), [Italian](README-it.md), [Russian](README-ru.md) or
-[Serbian](README-sr.md) language
+Zeige [Czech](README-cs.md), [Englisch](README.md), [deutsch](README-de.md),
+[spanisch](README-es.md), [Italienisch](README-it.md), [russisch](README-ru.md)
+oder [serbisch](README-sr.md)
 
 # Dies ist das wichtigste Entwicklungsprojekt
 
