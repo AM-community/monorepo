@@ -1,6 +1,6 @@
-Show in [Czech](README-cs.md), [English](README.md), [German](README-de.md),
-[Spanish](README-es.md), [Italian](README-it.md), [Russian](README-ru.md) or
-[Serbian](README-sr.md) language
+Mostra in lingua [ceco](README-cs.md), [inglese](README.md),
+[tedesco](README-de.md), [spagnolo](README-es.md), [italiano](README-it.md),
+[russo](README-ru.md) o [serbo](README-sr.md)
 
 # Questo è il repository principale di sviluppo
 
@@ -10,7 +10,7 @@ E sarà automaticamente sincronizzato con i singoli repository sotto questa
 organizzazione
 
 - [AM](https://github.com/AM-community/am)
-- [localizzazione]
+- [localizzazione](https://github.com/AM-community/localization)
 
 🦉 File di localizzazione 🦉
 
