@@ -4,45 +4,46 @@ Show in [Czech](README-cs.md), [English](README.md), [German](README-de.md),
 
 # Questo è il repository principale di sviluppo
 
-Tutto accadrà in questo repo
+Tutto accadrà in questo repository
 
 E sarà automaticamente sincronizzato con i singoli repository sotto questa
 organizzazione
 
-- [AM]
+- [AM](https://github.com/AM-community/am)
 - [localizzazione]
 
 🦉 File di localizzazione 🦉
 
 Per il progetto [AM](https://github.com/ivan-hc/AM)
 # Per ora in modalità test
-Vieni e aiutaci a tradurre AM in *tua* lingua
+Vieni e aiutaci a tradurre AM nella *tua* lingua
 
-[Stato di localizzazione]
+[Stato della traduzione]
 
-Se la tua lingua non è ancora elencata sarebbe fantastico se lo aggiungi
+Se la tua lingua non è ancora elencata sarebbe fantastico se tu lo aggiungessi
 [qui](https://hosted.weblate.org/new-lang/am/am/)
 
-[Stato di localizzazione]
+[Stato della traduzione]
 
-- - si'
-- [controlla]
-- [github](https://github.com/AM-community/.github) (organizzazioni leggere)
+- [flusso di lavoro](https://github.com/AM-community/workflows)
+- [controlli](https://github.com/AM-community/checks)
+- [github](https://github.com/AM-community/.github) (readme dell'organizzazione)
 
-Unisciti al nostro sforzo
-# ⭐ per rendere gli AppImages ancora meglio 🚀
+Accedi e unisciti al nostro team
+# ⭐ per rendere le AppImage qualcosa di migliore 🚀
 
-### Per verificare lo sviluppo, riempire problemi, tirare richieste o discussioni si prega di utilizzare
+### Per controllare gli sciluppi, risolvere problemi, richiedere informazioni o aprire discussioni, utilizza
 
-# [monorepo]
-(Storing tradotto file binari .mo grazie a git-lf installati in questo repo)
+# [monorepo](https://github.com/AM-community/monorepo)
+(La memorizzazione dei file binari .mo tradotti avviene grazie a git-lfs,
+installato in questo repository)
 
-Da qui è tutto il resto automaticamente aggiornato
+Da qui è tutto aggiornato automaticamente
 
-Abbiamo una stella: da [@Eloitor]
+Abbiamo una :star: da [@Eloitor](https://github.com/Eloitor)
 
-Abbiamo una stella: da [@zen0bit](https://github.com/zen0bit)
+Abbiamo una :star: da [@zen0bit](https://github.com/zen0bit)
 
 Abbiamo una :star: da [@ivan-hc](https://github.com/ivan-hc)
 
-Abbiamo una stella: da [@Ranamom]
+Abbiamo una :star: da [@Ranamom]
