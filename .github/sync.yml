@@ -4,8 +4,6 @@ group:
       dest: AM-INSTALLER
     - source: am/APP-MANAGER
       dest: APP-MANAGER
-    - source: am/CONTRIBUTING.md
-      dest: CONTRIBUTING.md
     - source: am/INSTALL
       dest: INSTALL
     - source: am/LICENSE
@@ -52,8 +50,6 @@ group:
       dest: LINGUAS
     - source: localization/README.md
       dest: README.md
-    - source: localization/contributing.po
-      dest: contributing.po
     - source: localization/cs.po
       dest: cs.po
     - source: localization/de.po
