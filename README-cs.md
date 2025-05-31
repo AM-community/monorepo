@@ -1,12 +1,12 @@
-Zobrazit v [Czech](README-cs.md), [anglicky](README.md), [Němec](README-de.md),
-[španělsky](README-es.md), [Italiano](README-it.md), [Rusky](README-ru.md) nebo
-[Serbian](README-sr.md) jazyk
+Zobrazit v [Českém](README-cs.md), [Anglickém](README.md),
+[Německém](README-de.md), [Španělském](README-es.md), [Italském](README-it.md),
+[Ruském](README-ru.md) nebo [Srbském](README-sr.md) jazyce
 
-# Toto je hlavní úložiště vývoje
+# Toto je hlavní repozitář vývoje
 
 Vše se odehrává v tomto repozitáři
 
-A bude automaticky synchronizován s jednotlivými repozitáři v této organizaci
+A bude automaticky synchronizován do jednotlivých repozitářů v této organizaci
 
 - [AM](https://github.com/AM-community/am)
 - [localization](https://github.com/AM-community/localization)
@@ -15,7 +15,7 @@ A bude automaticky synchronizován s jednotlivými repozitáři v této organiza
 
 Pro [AM](https://github.com/ivan-hc/AM) projekt
 # Nyní v testovacím režimu
-Přijďte a pomozte nám přeložit AM do *vašeho* jazyku
+Přijďte a pomozte nám přeložit AM do *vašeho* jazyka
 
 [![Stav
 lokalizace](https://hosted.weblate.org/widget/am/am/open-graph.png)](https://hosted.weblate.org/engage/am/)
