@@ -8,42 +8,18 @@ group:
       dest: INSTALL
     - source: am/LICENSE
       dest: LICENSE
-    - source: am/README-cs_CZ.md
-      dest: README-cs_CZ.md
-    - source: am/README-de.md
-      dest: README-de.md
-    - source: am/README-es.md
-      dest: README-es.md
-    - source: am/README-it.md
-      dest: README-it.md
-    - source: am/README-ru.md
-      dest: README-ru.md
-    - source: am/README-sr.md
-      dest: README-sr.md
     - source: am/README.md
       dest: README.md
     - source: am/appimage-bulder-scripts
       dest: appimage-bulder-scripts
-    - source: am/cs_CZ.md
-      dest: cs_CZ.md
-    - source: am/de.md
-      dest: de.md
     - source: am/docs
       dest: docs
-    - source: am/es.md
-      dest: es.md
-    - source: am/it.md
-      dest: it.md
     - source: am/modules
       dest: modules
     - source: am/programs
       dest: programs
-    - source: am/ru.md
-      dest: ru.md
     - source: am/sample
       dest: sample
-    - source: am/sr.md
-      dest: sr.md
     - source: am/templates
       dest: templates
     - source: am/tools
