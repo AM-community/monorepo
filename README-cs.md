@@ -1,6 +1,6 @@
-Zobrazit v [cs](README-cs.md) [de](README-de.md) [cs](README.md)
-[es](README-es.md) [it](README-it.md) [ru](README-ru.md) [sr](README-sr.md)
-jazyce
+Zobrazit v [Czech](README-cs.md), [anglicky](README.md), [Němec](README-de.md),
+[španělsky](README-es.md), [Italiano](README-it.md), [Rusky](README-ru.md) nebo
+[Serbian](README-sr.md) jazyk
 
 # Toto je hlavní úložiště vývoje
 
