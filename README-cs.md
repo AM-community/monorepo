@@ -9,7 +9,7 @@ Vše se odehrává v tomto repozitáři
 A bude automaticky synchronizován s jednotlivými repozitáři v této organizaci
 
 - [AM](https://github.com/AM-community/am)
-- [localizace](https://github.com/AM-community/localization)
+- [localization](https://github.com/AM-community/localization)
 
 🦉 Lokalizace souborů 🦉
 
@@ -33,7 +33,7 @@ lokalizace](https://hosted.weblate.org/widget/am/multi-auto.svg)](https://hosted
 Připojte se k našemu snažení
 # ⭐ udělat AppImage ještě lepší 🚀
 
-### Chcete-li zkontrolovat vývoj, vyplňovat problémy, vytahovat požadavky nebo diskuze, použijte
+### Chcete-li zkontrolovat vývoj, máte-li problémy, požadavky o natažení nebo chcete diskutovat, použijte
 
 # [monorepo](https://github.com/AM-community/monorepo)
 (Uložení přeložených binárních .mo souborů díky git-lfs nainstalovaném v tomto
