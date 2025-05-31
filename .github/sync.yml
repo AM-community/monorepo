@@ -50,6 +50,8 @@ group:
       dest: LINGUAS
     - source: localization/README.md
       dest: README.md
+    - source: localization/contributing.po
+      dest: contributing.po
     - source: localization/cs.po
       dest: cs.po
     - source: localization/de.po
