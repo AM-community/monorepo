@@ -20,6 +20,8 @@ group:
       dest: README-ru.md
     - source: am/README-sr.md
       dest: README-sr.md
+    - source: am/README.md
+      dest: README.md
     - source: am/appimage-bulder-scripts
       dest: appimage-bulder-scripts
     - source: am/cs_CZ.md
