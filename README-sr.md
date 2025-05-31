@@ -1,51 +1,52 @@
-#Sajam @in [#Čeh](README-cs.md), [@English](README.md), [@German](README-de.md),
-[@Spanish](README-es.md), [@Italian](README-it.md), [@Russian](README-ru.md) ili
-[#srpski](README-sr.md) #jezik
+Prikaži na [češkom](README-cs.md), [engleskom](README.md),
+[nemačkom](README-de.md), [španskom](README-es.md),
+[italijanskom](README-it.md), [ruskom](README-ru.md) ili [srpskom](README-sr.md)
+jeziku
 
-# @This @i #velik #razvoj repository
+# Ovo je glavni repozitorijum za dalje razvijanje
 
-@Everything #volja #zbivati @in @this repo
+Sve će se dešavati na ovom repu
 
-A #volja #biti automaticaly synced #na #jedinka repositories ispod @this
-organization
+I automatski će biti sinhronizovan sa pojedinim repozitorijumima u okviru ove
+organizacije
 
-- [@AM](https://github.com/AM-community/am)
-- [localization](https://github.com/AM-community/localization)
+- [AM](https://github.com/AM-community/am)
+- [lokalizacija](https://github.com/AM-community/localization)
 
-🦉 Localization #kartoteka 🦉
+🦉 Lokalizacijski fajlovi 🦉
 
-@For [@AM](https://github.com/ivan-hc/AM) #projekt
-# Zasada @in @testing @mode
-Doći a pomoć u prevoditi AM na tvoj jezik
+Za [AM](https://github.com/ivan-hc/AM) projekat
+# Za sada u režimu testiranja
+Dođi i pomozi nam da prevedemo AM na *vaš* jezik
 
-[![Localization
-#Stanje](https://hosted.weblate.org/widget/am/am/open-graph.png)](https://hosted.weblate.org/engage/am/)
+[![Stanje
+Lokalizacije](https://hosted.weblate.org/widget/am/am/open-graph.png)](https://hosted.weblate.org/engage/am/)
 
-Li #tvoj #jezik #biti ne @yet #popisati @would #biti @awesome li #free #dodati
-#free [tuda](https://hosted.weblate.org/new-lang/am/am/)
+Ako tvoj jezik još nije ulistan, bilo bi super da ga dodaš
+[ovde](https://hosted.weblate.org/new-lang/am/am/)
 
-[![Localization
-#Stanje](https://hosted.weblate.org/widget/am/multi-auto.svg)](https://hosted.weblate.org/engage/am/)
+[![Stanje
+Lokalizacije](https://hosted.weblate.org/widget/am/multi-auto.svg)](https://hosted.weblate.org/engage/am/)
 
-- [workflows](https://github.com/AM-community/workflows)
-- [#pregled](https://github.com/AM-community/checks)
-- [github](https://github.com/AM-community/.github) (organization readme)
+- [tokovi posla](https://github.com/AM-community/workflows)
+- [provere](https://github.com/AM-community/checks)
+- [github](https://github.com/AM-community/.github) (organizacijski readme)
 
-#Doći a #spajati #naš #napor
-# ⭐ #na #kov AppImages @even @better 🚀
+Dođi i pridruži se našim naporima
+# ⭐ kako bi učinio AppImage mnogo boljim 🚀
 
-### #Na #pregled #razvoj, #ispuniti #tema, @pull #zamolba ili #diskusija @please #uporaba
+### Kako bi pogledao dalje razvijanje, izvestio probleme, pull request-ove ili diskusije, molim koristi
 
 # [monorepo](https://github.com/AM-community/monorepo)
-(@Storing #prevoditi binary .mo #kartoteka @thanks to git-lfs @install @in @this
-repo)
+(Skladištenje prevedenih binarnih .mo fajlova je zahvaljujući git-lfs koji je
+instaliran na ovom repu)
 
-@From here @i @everything @else automagicaly #poboljšati
+Odavde je sve ostalo automatski ažurirano
 
-#Free #dobiti @a :#zvijezda: @from [@Eloitor](https://github.com/Eloitor)
+Imamo :star: od [@Eloitor](https://github.com/Eloitor)
 
-#Free #dobiti @a :#zvijezda: @from [@zen0bit](https://github.com/zen0bit)
+Imamo :star: od [@zen0bit](https://github.com/zen0bit)
 
-#Free #dobiti @a :#zvijezda: @from [@iv@a-hc](https://github.com/ivan-hc)
+Imamo :star: od [@ivan-hc](https://github.com/ivan-hc)
 
-#Free #dobiti @a :#zvijezda: @from [@Ranamom](https://github.com/Ranamom)
+Imamo :star: od [@Ranamom](https://github.com/Ranamom)
