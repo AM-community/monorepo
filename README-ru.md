@@ -11,7 +11,7 @@
 - [AM](https://github.com/AM-community/am)
 - [локализация](https://github.com/AM-community/localization)
 
-Файлы локализации
+🦉 Файлы локализации 🦉
 
 Для проекта [AM](https://github.com/ivan-hc/AM)
 # На данный момент в режиме тестирования
