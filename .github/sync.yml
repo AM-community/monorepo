@@ -8,6 +8,18 @@ group:
       dest: INSTALL
     - source: am/LICENSE
       dest: LICENSE
+    - source: am/README-cs_CZ.md
+      dest: README-cs_CZ.md
+    - source: am/README-de.md
+      dest: README-de.md
+    - source: am/README-es.md
+      dest: README-es.md
+    - source: am/README-it.md
+      dest: README-it.md
+    - source: am/README-ru.md
+      dest: README-ru.md
+    - source: am/README-sr.md
+      dest: README-sr.md
     - source: am/appimage-bulder-scripts
       dest: appimage-bulder-scripts
     - source: am/cs_CZ.md
