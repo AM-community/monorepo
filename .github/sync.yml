@@ -10,8 +10,6 @@ group:
       dest: INSTALL
     - source: am/LICENSE
       dest: LICENSE
-    - source: am/README.md
-      dest: README.md
     - source: am/appimage-bulder-scripts
       dest: appimage-bulder-scripts
     - source: am/cs_CZ.md
@@ -64,8 +62,6 @@ group:
       dest: es.po
     - source: localization/it.po
       dest: it.po
-    - source: localization/readme.po
-      dest: readme.po
     - source: localization/ru.po
       dest: ru.po
     - source: localization/source.po
