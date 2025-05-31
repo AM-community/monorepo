@@ -1,5 +1,6 @@
-Show in [cs](README-cs.md) [de](README-de.md) [en](README.md) [es](README-es.md)
-[it](README-it.md) [ru](README-ru.md) [sr](README-sr.md) language
+#Sajam @in [@c](README-cs.md) [@de](README-de.md) [en](README.md)
+[@e](README-es.md) [#free](README-it.md) [ru](README-ru.md) [sr](README-sr.md)
+#jezik
 
 # @This @i #velik #razvoj repository
 
