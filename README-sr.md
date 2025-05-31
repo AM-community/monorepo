@@ -1,6 +1,6 @@
-#Sajam @in [@c](README-cs.md) [@de](README-de.md) [en](README.md)
-[@e](README-es.md) [#free](README-it.md) [ru](README-ru.md) [sr](README-sr.md)
-#jezik
+#Sajam @in [#Čeh](README-cs.md), [@English](README.md), [@German](README-de.md),
+[@Spanish](README-es.md), [@Italian](README-it.md), [@Russian](README-ru.md) ili
+[#srpski](README-sr.md) #jezik
 
 # @This @i #velik #razvoj repository
 
