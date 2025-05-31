@@ -98,7 +98,7 @@ _use_translate() {
 		if [ -z "$amlocale" ] || [ "$amlocale" = "en" ]; then
 			iso_code="en"
 		elif ! echo "$ISO_CODES" | tr ' ' '\n' | grep -q "^$amlocale$"; then
-			printf "ERROR, \"%b\" is not a valid locale code\n\nList of valid locale codes:\n\n%b\n\n" "$amlocale" "$ISO_CODES"| fold -sw 77 | sed 's/^/ /g'
+			printf "ERROR, \"%b\" is not a valid locale code\n\nList of valid locale codes:\n\n%b\n\n" "$amlocale" "$ISO_CODES"| _fit
 		else
 			iso_code="$amlocale"
 			_set_locale
@@ -107,7 +107,7 @@ _use_translate() {
 	elif [ "$2" = "en" ]; then
 		iso_code="en"
 	elif ! echo "$ISO_CODES" | tr ' ' '\n' | grep -q "^$2$"; then
-		printf "ERROR, \"%b\" is not a valid locale code\n\nList of valid locale codes:\n\n%b\n\n" "$2" "$ISO_CODES" | fold -sw 77 | sed 's/^/ /g'
+		printf "ERROR, \"%b\" is not a valid locale code\n\nList of valid locale codes:\n\n%b\n\n" "$2" "$ISO_CODES" | _fit
 	else
 		iso_code="$2"
 		_set_locale
