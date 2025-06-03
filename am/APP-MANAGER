@@ -2,9 +2,6 @@
 
 AMVERSION="9.8"
 
-# Determine main repository and branch
-AMREPO="https://raw.githubusercontent.com/ivan-hc/AM/main"
-
 # Determine the name of this script and its working directory
 export REALDIR="$PWD"
 DIR="$( cd "$( dirname "$0" )" && pwd )"
@@ -37,18 +34,29 @@ RED='\033[0;31m'
 Gold='\033[0;33m'
 Green='\033[0;32m'
 LightBlue='\033[1;34m'
-DIVIDING_LINE="-----------------------------------------------------------------------------"
+DIVIDING_LINE=$(printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' '-')
 
 # Fit texts to an acceptable width
 _fit() {
 	command -v tput >/dev/null 2>&1 && fold -sw "$(("$(tput cols)"-"3"))" | sed 's/^/ /g' || fold -sw 77 | sed 's/^/ /g'
 }
 
-# DEVELOPER MODE
-[ -f "$DATADIR/AM/betatester" ] && AMREPO="https://raw.githubusercontent.com/ivan-hc/AM/dev"
-
-# Branch and modues source
-AMBRANCH=$(basename "$AMREPO")
+# Determine main repository and branch
+if [ -f "$AMDATADIR"/betatester ] || [ -z "$AMOWNER" ]; then
+	AMOWNER="ivan-hc"
+	AMBRANCH="dev"
+elif [ -f "$AMDATADIR"/betatester ] && [ -n "$AMOWNER" ]; then
+	AMOWNER="$AMOWNER"
+	AMBRANCH="dev"
+elif [ ! -f "$AMDATADIR"/betatester ] && [ -n "$AMOWNER" ]; then
+	AMOWNER="$AMOWNER"
+	AMBRANCH="main"
+else
+	# default
+	AMOWNER="ivan-hc"
+	AMBRANCH="main"
+fi
+AMREPO="https://raw.githubusercontent.com/$AMOWNER/AM/$AMBRANCH"
 MODULES_SOURCE="$AMREPO/modules"
 
 # Translations
@@ -63,16 +71,30 @@ _check_valid_iso_codes() {
 }
 
 _set_locale() {
-	if curl --output /dev/null --silent --head --fail "https://github.com/ivan-hc/AM/raw/$AMBRANCH/translations/usr/share/locale/$iso_code/LC_MESSAGES/am.mo" 1>/dev/null; then
-		mkdir -p "$DATADIR/locale/$iso_code/LC_MESSAGES" && rm -f "$DATADIR"/locale/"$iso_code"/LC_MESSAGES/am.mo "$DATADIR"/locale/"$iso_code"/LC_MESSAGES/appman.mo
-		curl -s -Lo "$DATADIR/locale/$iso_code/LC_MESSAGES/am.mo" "https://github.com/ivan-hc/AM/raw/$AMBRANCH/translations/usr/share/locale/$iso_code/LC_MESSAGES/am.mo"
-		ln -sf "$DATADIR/locale/$iso_code/LC_MESSAGES/am.mo" "$DATADIR/locale/$iso_code/LC_MESSAGES/appman.mo"
-		mkdir -p "$DATADIR/AM" && echo "$iso_code" > "$DATADIR/AM/locale"
+	if [ "$AMOWNER" == 'am-community' ]; then
+		if curl --output /dev/null --silent --head --fail "https://github.com/AM-community/monorepo/raw/refs/heads/$AMBRANCH/localization/usr/share/locale/$iso_code/LC_MESSAGES/am.mo" 1>/dev/null; then
+			mkdir -p "$DATADIR/locale/$iso_code/LC_MESSAGES" && rm -f "$DATADIR"/locale/"$iso_code"/LC_MESSAGES/am.mo
+			curl -s -Lo "$DATADIR/locale/$iso_code/LC_MESSAGES/am.mo" "https://github.com/AM-community/monorepo/raw/refs/heads/$AMBRANCH/localization/usr/share/locale/$iso_code/LC_MESSAGES/am.mo"
+			ln -sf "$DATADIR/locale/$iso_code/LC_MESSAGES/am.mo"
+			mkdir -p "$DATADIR/AM" && echo "$iso_code" > "$DATADIR/AM/locale"
+		else
+			printf $"%b\n No locale available for you, consider adding one\n Visit https://github.com/AM-community/localization for more information\n" "$DIVIDING_LINE"
+			printf $" For now, we set the locale to \"en\" (default) to further avoid this message\n Run \"$CLI language\" to set an alternative language\n%b\n" "$DIVIDING_LINE"
+			iso_code="en"
+			mkdir -p "$DATADIR/AM" && echo "en" > "$DATADIR/AM/locale"
+		fi
 	else
-		printf "%b\n No locale available for you, consider adding one\n Visit https://github.com/ivan-hc/AM/tree/$AMBRANCH/translations\n" "$DIVIDING_LINE"
-		printf " For now, we set the locale to \"en\" (default) to further avoid this message\n Run \"$CLI translate\" to set an alternative language\n%b\n" "$DIVIDING_LINE"
-		iso_code="en"
-		mkdir -p "$DATADIR/AM" && echo "en" > "$DATADIR/AM/locale"
+		if curl --output /dev/null --silent --head --fail "$AMREPO/translations/usr/share/locale/$iso_code/LC_MESSAGES/am.mo" 1>/dev/null; then
+			mkdir -p "$DATADIR/locale/$iso_code/LC_MESSAGES" && rm -f "$DATADIR"/locale/"$iso_code"/LC_MESSAGES/am.mo "$DATADIR"/locale/"$iso_code"/LC_MESSAGES/appman.mo
+			curl -s -Lo "$DATADIR/locale/$iso_code/LC_MESSAGES/am.mo" "$AMREPO/translations/usr/share/locale/$iso_code/LC_MESSAGES/am.mo"
+			ln -sf "$DATADIR/locale/$iso_code/LC_MESSAGES/am.mo" "$DATADIR/locale/$iso_code/LC_MESSAGES/appman.mo"
+			mkdir -p "$DATADIR/AM" && echo "$iso_code" > "$DATADIR/AM/locale"
+		else
+			printf "%b\n No locale available for you, consider adding one\n Visit https://github.com/$AMOWNER/AM/tree/$AMBRANCH/translations\n" "$DIVIDING_LINE"
+			printf " For now, we set the locale to \"en\" (default) to further avoid this message\n Run \"$CLI translate\" to set an alternative language\n%b\n" "$DIVIDING_LINE"
+			iso_code="en"
+			mkdir -p "$DATADIR/AM" && echo "en" > "$DATADIR/AM/locale"
+		fi
 	fi
 }
 
@@ -89,7 +111,7 @@ if ! echo "$LANG" | grep -q "^en.\|^C" && [ "$iso_code" != "en" ]; then
 	fi
 fi
 
-_use_translate() {
+_use_language() {
 	echo "$DIVIDING_LINE"
 	if [ -z "$2" ]; then
 		[ -f "$DATADIR/AM/locale" ] && rm -f "$DATADIR/AM/locale"
@@ -98,7 +120,7 @@ _use_translate() {
 		if [ -z "$amlocale" ] || [ "$amlocale" = "en" ]; then
 			iso_code="en"
 		elif ! echo "$ISO_CODES" | tr ' ' '\n' | grep -q "^$amlocale$"; then
-			printf "ERROR, \"%b\" is not a valid locale code\n\nList of valid locale codes:\n\n%b\n\n" "$amlocale" "$ISO_CODES"| _fit
+			printf $"ERROR, \"%b\" is not a valid locale code\n\nList of valid locale codes:\n\n%b\n\n" "$amlocale" "$ISO_CODES"| _fit
 		else
 			iso_code="$amlocale"
 			_set_locale
@@ -107,7 +129,7 @@ _use_translate() {
 	elif [ "$2" = "en" ]; then
 		iso_code="en"
 	elif ! echo "$ISO_CODES" | tr ' ' '\n' | grep -q "^$2$"; then
-		printf "ERROR, \"%b\" is not a valid locale code\n\nList of valid locale codes:\n\n%b\n\n" "$2" "$ISO_CODES" | _fit
+		printf $"ERROR, \"%b\" is not a valid locale code\n\nList of valid locale codes:\n\n%b\n\n" "$2" "$ISO_CODES" | _fit
 	else
 		iso_code="$2"
 		_set_locale
@@ -369,7 +391,7 @@ _am_dependences_check() {
 		printf $"%bList of the %b core dependences\033[0m:\n\n%b\n" "${Green}" "$AMCLIUPPER $AMVERSION" "$AMDEPENDENCES" | _fit
 		echo "$DIVIDING_LINE"
 		printf $"If this message appears it is because you are missing some dependency and if its the first time its because something new has been introduced.\n\n" | _fit
-		printf $" See %bhttps://github.com/ivan-hc/AM#core-dependences\033[0m for more information\n" "${LightBlue}"
+		printf $" See %bhttps://github.com/$AMOWNER/AM#core-dependences\033[0m for more information\n" "${LightBlue}"
 		echo "$DIVIDING_LINE"
 		exit 1
 	fi
@@ -387,7 +409,7 @@ _check_ubuntu_mess() {
 		echo "$DIVIDING_LINE"
 		printf $"\n %b⚠️ WARNING: ACCESS TO USER NAMESPACES IS RESTRICTED! \033[0m\n\n" "${RED}"
 		echo $" Some apps may not run, you need to enable access to user namespaces, see"
-		printf " %bhttps://github.com/ivan-hc/AM/blob/main/docs/troubleshooting.md#ubuntu-mess\033[0m\n" "${LightBlue}"
+		printf " %bhttps://github.com/$AMOWNER/AM/blob/main/docs/troubleshooting.md#ubuntu-mess\033[0m\n" "${LightBlue}"
 		echo $" to know more."
 		echo ""
 		echo "$DIVIDING_LINE"
@@ -568,11 +590,11 @@ fi
 ################################################################################################################################################################
 
 # COMPLETION LIST
-available_options="about add apikey backup clean config disable downgrade download enable extra files hide home icons info \
-	install install-appimage launcher list lock neodb newrepo nolibfuse off on overwrite purge query reinstall remove sandbox \
-	select sync template test translate unhide unlock update --all --appimages --apps --byname --config --convert --debug \
+available_options="about add apikey backup clean config disable downgrade download enable extra files -h --help help hide home icons info \
+	install install-appimage language launcher list lock neodb newrepo nolibfuse off on overwrite purge query reinstall remove sandbox \
+	select sync template test translate translate-new unhide unlock update --all --appimages --apps --byname --config --convert --debug \
 	--devmode-disable --devmode-enable --disable-notifications --enable-notifications --force-latest --home --icons \
-	-ias --launcher --less --pkg --portable --rollback --disable-sandbox --sandbox --system --translate --user $third_party_flags"
+	-ias --language --launcher --less --pkg --portable --rollback --disable-sandbox --sandbox --system --translate --translate-new --user $third_party_flags"
 
 _completion_lists() {
 	# Remove existing lists and download new ones
@@ -735,7 +757,7 @@ _validate_github_token() {
 
 	# Check HTTP status code for proper validation
 	local HTTP_STATUS
-	HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" --header "Authorization: token $token" "https://api.github.com/repos/ivan-hc/AM/releases")
+	HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" --header "Authorization: token $token" "https://api.github.com/repos/$AMOWNER/AM/releases")
 
 	if [ "$HTTP_STATUS" = "200" ]; then
 		[ "$quiet" != "true" ] && echo $"Validation successful!"
@@ -984,7 +1006,7 @@ _sync_installation_scripts() {
 				if [ "$CURRENT" = "$SOURCE" ]; then
 					echo -ne "\r" 2>/dev/null
 				else
-					printf $" ◆ %b%b\033[0m has changed, you may need to reinstall it, see\n   https://github.com/ivan-hc/AM/blob/main/programs/%b/%b\n" "${RED}" "$scriptname" "$ARCH" "$scriptname"
+					printf $" ◆ %b%b\033[0m has changed, you may need to reinstall it, see\n   https://github.com/$AMOWNER/AM/blob/main/programs/%b/%b\n" "${RED}" "$scriptname" "$ARCH" "$scriptname"
 					to_reinstall_true=1
 				fi
 			else
@@ -1023,10 +1045,10 @@ _sync_locale() {
 	if [ -f "$DATADIR/locale/$iso_code/LC_MESSAGES/am.mo" ]; then
 		printf $"%b\n Check and update localization...\n" "$DIVIDING_LINE"
 		rm -f "$DATADIR/locale/$iso_code/LC_MESSAGES/am.mo"
-		curl -s -Lo "$DATADIR/locale/$iso_code/LC_MESSAGES/am.mo" "https://github.com/ivan-hc/AM/raw/$AMBRANCH/translations/usr/share/locale/$iso_code/LC_MESSAGES/am.mo"
+		curl -s -Lo "$DATADIR/locale/$iso_code/LC_MESSAGES/am.mo" "$AMREPO/translations/usr/share/locale/$iso_code/LC_MESSAGES/am.mo"
 	elif [ "$iso_code" = "en" ]; then
 		_check_valid_iso_codes
-		if curl --output /dev/null --silent --head --fail "https://github.com/ivan-hc/AM/raw/$AMBRANCH/translations/usr/share/locale/$iso_code/LC_MESSAGES/am.mo" 1>/dev/null; then
+		if curl --output /dev/null --silent --head --fail "$AMREPO/translations/usr/share/locale/$iso_code/LC_MESSAGES/am.mo" 1>/dev/null; then
 			printf "%b\n Found a translation file, run the \"%b%b translate %b\033[0m\" command to use it...\n" "$DIVIDING_LINE" "$Gold" "$AMCLI" "$iso_code"
 		fi
 	fi
@@ -1067,10 +1089,10 @@ _sync_amcli() {
 		echo -ne $" A new release of \"$AMCLIUPPER\" is available, please wait...\r"
 		echo $" ◆ \"$AMCLIUPPER\" IS NOW UPDATED TO THE BRAND NEW \"$NEW_AM_VERSION\" VERSION!"
 		printf $"\n  Replacement of version \"%b\" currently in use, COMPLETED! \n" "$CURRENT_AM_VERSION"
-		printf $"\n See https://github.com/ivan-hc/AM/commits/main\n\n"
+		printf $"\n See https://github.com/$AMOWNER/AM/commits/main\n\n"
 	else
 		echo $" ◆ \"$AMCLIUPPER\" IS ALREADY UPDATED, CURRENT VERSION \"$CURRENT_AM_VERSION\""
-		printf $"\n See https://github.com/ivan-hc/AM/commits/%b\n\n" "$AMBRANCH"
+		printf $"\n See https://github.com/$AMOWNER/AM/commits/%b\n\n" "$AMBRANCH"
 	fi
 }
 
@@ -1089,7 +1111,7 @@ _use_sync() {
 						_sync_modules
 						_sync_amcli
 					else
-						printf "%b\n DONE! \n" "$DIVIDING_LINE"
+						printf $"%b\n DONE! \n" "$DIVIDING_LINE"
 					fi
 				fi
 			else
@@ -1227,7 +1249,7 @@ _update_launchers() {
 			appimage_full_path=$(awk -F'=| ' '/Exec=/{print $2; exit}' "$var" | sed 's/"//g; s/\s.*$//')
 			appimagename=$(basename -- "$appimage_full_path")
 			appimage_path=$(echo "$appimage_full_path" | sed -E 's|/[^/]+$|/|; s/\/*$//g')
-			printf "%b\n File: %b%b\033[0m\n Path: %b" "$DIVIDING_LINE" "${Green}" "$appimagename" "$appimage_path"
+			printf $"%b\n File: %b%b\033[0m\n Path: %b" "$DIVIDING_LINE" "${Green}" "$appimagename" "$appimage_path"
 			if [ ! -f "$appimage_full_path" ]; then
 				echo $"(unmounted)" | _fit
 			else
@@ -1354,6 +1376,9 @@ case "$1" in
 		echo ""
 		echo $" Run the \"$AMCLI -h\" command to find out more"
 		echo "$DIVIDING_LINE"
+		echo $"   or try AM with GUI (Alpha version!)"
+		echo $" Run the \"$AMCLI --gui\" command"
+		echo $"   and help us catch the bugs please"
 		exit 0
 		;;
 	# EXTERNAL OPTIONS / MODULES
@@ -1367,6 +1392,10 @@ case "$1" in
 	'backup'|'-b'|\
 	'config'|'-C'|'--config'|'home'|'-H'|'--home'|'-HC'|'-CH'|'HC'|'CH'|\
 	'downgrade'|'--rollback'|\
+	'--gui')
+		MODULE="yad.am"
+		_use_module "$@"
+		;;
 	'icons'|'--icons'|\
 	'launcher'|'--launcher'|\
 	'lock'|'unlock'|\
@@ -1387,6 +1416,9 @@ case "$1" in
 		[ "$CLI" = am ] && [ -f "$APPMANCONFIG"/appman-mode ] && printf "%b" "$APPMAN_MSG"
 		_use_module "$@"
 		;;
+	'language'|'--language')
+		_use_language "$@"
+		;;
 	'sandbox'|'--sandbox'|'--disable-sandbox')
 		MODULE="sandboxes.am"
 		_use_module "$@"
@@ -1397,7 +1429,9 @@ case "$1" in
 		_use_module "$@"
 		;;
 	'translate'|'--translate')
-		_use_translate "$@"
+		MODULE="translate.am"
+		_online_check
+		_use_module
 		;;
 	# INBUILT OPTIONS
 	'apikey')
@@ -1464,7 +1498,7 @@ case "$1" in
 	'version'|'-v'|'--version')
 		echo "$AMVERSION"
 		;;
-	'help'|'-h')
+	'help'|'-h'|'--help')
 		################################################################################################################################################################
 		#				HELP
 		################################################################################################################################################################
@@ -1486,6 +1520,12 @@ case "$1" in
 					${LightBlue}$AMCLI -a {PROGRAM}\033[0m
 
 			Description: Shows more info about one or more apps.
+
+			${Gold}--gui\033[0m
+
+					${LightBlue}$AMCLI --gui {PROGRAM}\033[0m
+
+			Description: Use AM with 3rd party GUI. (Alpha!) Using bash and ${LightBlue}Y\033[0met ${LightBlue}A\033[0mnother ${LightBlue}D\033[0mialog.
 
 			${Gold}apikey\033[0m
 
@@ -1578,7 +1618,7 @@ case "$1" in
 					${LightBlue}$AMCLI -i --force-latest {PROGRAM}\033[0m
 					${LightBlue}$AMCLI -i --icons {PROGRAM}\033[0m
 					${LightBlue}$AMCLI -i --sandbox {PROGRAM}\033[0m
-			$(if [ -n "$third_party_flags" ]; then echo "" && echo "	Third-party databases:" && echo "" && for a in $third_party_flags; do echo "		${LightBlue}$AMCLI -i $a {PROGRAM}\033[0m"; done; fi)
+			$(if [ -n "$third_party_flags" ]; then echo "" && echo $"	Third-party databases:" && echo "" && for a in $third_party_flags; do echo "		${LightBlue}$AMCLI -i $a {PROGRAM}\033[0m"; done; fi)
 
 			Description: Install one or more programs or libraries from the list. With the \"--debug\" option you can see log messages to debug the script. For more details on \"--force-latest\", see the dedicated option, below. Use the \"--icons\" flag to allow the program to use icon themes. The \"--sandbox\" flag allows you to set sandboxes for AppImage packages. It can also be extended with additional flags (see third-party flags, at the bottom of this message).
 
@@ -1599,7 +1639,7 @@ case "$1" in
 					${LightBlue}$AMCLI -l --appimages\033[0m
 					${LightBlue}$AMCLI -l --portable\033[0m
 					${LightBlue}$AMCLI -l --all\033[0m
-			$(if [ -n "$third_party_flags" ]; then echo "" && echo "	Third-party databases:" && echo "" && for a in $third_party_flags; do echo "		${LightBlue}$AMCLI -l $a\033[0m"; done; fi)
+			$(if [ -n "$third_party_flags" ]; then echo "" && echo $"	Third-party databases:" && echo "" && for a in $third_party_flags; do echo "		${LightBlue}$AMCLI -l $a\033[0m"; done; fi)
 
 			Description: Shows the list of all the apps available. Without flags only shows the apps in the \"AM\" database, add the \"--appimages\" to show only the AppImages or \"--portable\" to show other formats from the \"AM\" database. The \"--all\" flag allows you to consult the set of all supported third-party databases. It can also be extended with additional flags (see third-party flags, at the bottom of this message).
 
@@ -1682,12 +1722,12 @@ case "$1" in
 
 			Description: Generate a custom installation script. To test the scripts, use the \"${LightBlue}$AMCLI -i '/path/to/script'\033[0m\" command or enter the directory of the script and run the \"${LightBlue}$AMCLI -i ./script\033[0m\" command, even using dedicated flags, if necessary (see \"-i\").
 
-			${Gold}translate, --translate\033[0m
+			${Gold}language, --language\033[0m
 
-					${LightBlue}$AMCLI --translate\033[0m
-					${LightBlue}$AMCLI --translate {CODE}\033[0m
+					${LightBlue}$AMCLI --language\033[0m
+					${LightBlue}$AMCLI --language {CODE}\033[0m
 
-			Description: Download and set one or more language packs (if available), set \"$AMCLI\" to English (default), your language or other languages.\n\nVisit https://github.com/ivan-hc/AM/tree/$AMBRANCH/translations to get source files needed to submit new translations or to improve the existing ones.
+			Description: Download and set one or more language packs (if available), set \"$AMCLI\" to English (default), your language or other languages.\n\nVisit https://github.com/$AMOWNER/AM/tree/$AMBRANCH/translations to get source files needed to submit new translations or to improve the existing ones.
 
 			${Gold}unhide\033[0m
 
@@ -1812,7 +1852,7 @@ case "$1" in
 
 			 SITES:
 
-			 https://github.com/ivan-hc/AM
+			 $AMREPO
 
 			 https://portable-linux-apps.github.io
 
