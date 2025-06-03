@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+
+##########################################################################
+# THIS MODULE IS USED TO CREATE AND UPDATE TRANSLATION FILES
+##########################################################################
+
+# Files for string extraction
+list="APP-MANAGER modules/database.am modules/install.am modules/management.am modules/sandboxes.am modules/template.am modules/translate.am modules/yad.am"
+
+# Enter AMCLI dir
+enter_() {
+  cd "$AMPATH" || echo $"Can´t enter AMPATH $AMPATH"
+}
+
+# Remove old pot
+prepare_() {
+  if [ -f source.pot ]; then
+    rm source.pot
+  fi
+}
+
+# extract strings from list
+extract_() {
+  for file in ${list}; do
+    echo "$file"
+    # Extract strings for translation
+    bash --dump-po-strings "$file" >> source.pot
+  done
+}
+
+# Create main translation file
+run_() {
+  LANGUAGE="English"
+  PACKAGE_NAME="am"
+  PACKAGE_VERSION="$AMVERSION"
+  TRANSLATOR_NAME="John Doe"
+  TRANSLATOR_EMAIL="john.doe@example.com"
+  touch temp.po
+  cat << EOF > temp.po
+# File with translation for AM
+# FIRST AUTHOR <EMAIL@ADDRESS>, $(date +"%Y")
+msgid ""
+msgstr ""
+"Project-Id-Version: ${PACKAGE_NAME} ${PACKAGE_VERSION}\n"
+"Report-Msgid-Bugs-To: https://github.com/ivan-hc/AM\n"
+"POT-Creation-Date: $(date +"%Y-%m-%d")\n"
+"PO-Revision-Date: $(date +"%Y-%m-%d")\n"
+"Last-Translator: ${TRANSLATOR_NAME} <${TRANSLATOR_EMAIL}>\n"
+"Language-Team: ${LANGUAGE} <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+EOF
+  # add strings to empty file with header
+  cat source.pot >> temp.po
+  # remove duplicities from po file
+  msguniq temp.po -o source.po
+  # recreate fixed pot file
+  msgcat --output-file=source.pot --unique --indent --no-wrap source.po
+}
+
+# Update all translations
+update_source() {
+  if [ -f source.po ]; then
+    msgmerge -U source.po source.pot
+  else
+    msginit --input source.po --output-file=source.po --no-translator --no-wrap --locale en
+  fi
+  msguniq --no-wrap source.po -o new.po
+  mv new.po source.po
+}
+
+update_cs() {
+  if [ -f cs.po ]; then
+    msgmerge -U cs.po source.pot
+  else
+    msginit --input source.po --output-file=cs.po --no-translator --no-wrap --locale cs
+  fi
+  msguniq --no-wrap source.po -o cs.po
+}
+
+# Cleaning
+clean_() {
+  rm -f temp.po
+  rm -f *.po~
+}
+
+# Run
+enter_
+prepare_
+extract_
+run_
+update_source
+update_cs
+clean_
+
+# Create machine translation files
+# msgfmt -o source.mo source.po
+
+echo $"Source for translations prepared"
