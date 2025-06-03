@@ -1,0 +1,202 @@
+name: 🛰️
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  #schedule:
+    #- cron: '0 */6 * * *'
+  repository_dispatch:
+    types: [trigger]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  GH_PAT: ${{ secrets.TOKEN }}
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  create-sync:
+    name: 🛰️ sync
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout dev-AM
+        uses: actions/checkout@main
+        with:
+          repository: am-community/monorepo
+          ref: dev-AM
+
+      - name: Add upstream as remote
+        run: |
+          git remote add AM https://github.com/ivan-hc/am
+          git fetch --no-write-fetch-head AM
+
+      - name: Sync dev-AM with upstream
+        run: |
+          git branch --set-upstream-to=AM/dev
+          git pull --no-edit
+
+      - name: Checkout main-AM
+        uses: actions/checkout@main
+        with:
+          repository: am-community/monorepo
+          ref: main-AM
+
+      - name: Sync main-AM with upstream
+        run: |
+          git branch --set-upstream-to=AM/main
+          git pull --no-edit
+
+      - name: Checkout am
+        uses: actions/checkout@main
+        with:
+          repository: am-community/am
+      - name: clean
+        run: |
+          rm -rf *
+          git add .
+
+      - name: Checkout .github
+        uses: actions/checkout@main
+        with:
+          repository: am-community/.github
+      - name: clean
+        run: |
+          rm -rf *
+          git add .
+
+      - name: Checkout localization
+        uses: actions/checkout@main
+        with:
+          repository: am-community/localization
+      - name: clean
+        run: |
+          rm -rf *
+          git add .
+
+      - name: Checkout workflows
+        uses: actions/checkout@main
+        with:
+          repository: am-community/workflows
+      - name: clean
+        run: |
+          rm -rf *
+          git add .
+
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: 🛰️ am
+        run: |
+          sync=am
+          #syncD=
+          branch=main
+          owner=am-community
+          SYNC=$(ls ${sync}/)
+          echo "$SYNC"
+          echo 'group:' > .github/sync.yml
+          echo '  - files:' >> .github/sync.yml
+          for item in $SYNC; do
+            echo "    - source: ${sync}/${item}" >> .github/sync.yml
+            echo "      dest: $item" >> .github/sync.yml
+          done
+          #echo '    - .github/workflows/add-stars.yml' >> .github/sync.yml
+          echo '    repos: |' >> .github/sync.yml
+          # Here use sync or syncD variable
+          echo "      ${owner}/${sync}@${branch}" >> .github/sync.yml
+
+      - name: 🛰️ AM Site and GitHub profile
+        run: |
+          sync=github
+          syncD=.github
+          branch=main
+          owner=am-community
+          SYNC=$(ls ${sync}/)
+          echo "$SYNC"
+          echo '' >> .github/sync.yml
+          echo '  - files:' >> .github/sync.yml
+          for item in $SYNC; do
+            echo "    - source: ${sync}/${item}" >> .github/sync.yml
+            echo "      dest: $item" >> .github/sync.yml
+          done
+          #echo '    - .github/workflows/add-stars.yml' >> .github/sync.yml
+          echo '    repos: |' >> .github/sync.yml
+          echo "      ${owner}/${syncD}@${branch}" >> .github/sync.yml
+
+      - name: 🛰️ localization
+        run: |
+          sync=localization
+          branch=main
+          owner=am-community
+          SYNC=$(ls ${sync}/)
+          echo "$SYNC"
+          echo '' >> .github/sync.yml
+          echo '  - files:' >> .github/sync.yml
+          for item in $SYNC; do
+            echo "    - source: ${sync}/${item}" >> .github/sync.yml
+            echo "      dest: $item" >> .github/sync.yml
+          done
+          #echo '    - .github/workflows/add-stars.yml' >> .github/sync.yml
+          echo '    repos: |' >> .github/sync.yml
+          echo "      ${owner}/${sync}@${branch}" >> .github/sync.yml
+
+      - name: 🛰️ workflows
+        run: |
+          sync=workflows
+          branch=main
+          owner=am-community
+          SYNC=$(ls ${sync}/)
+          echo "$SYNC"
+          echo '' >> .github/sync.yml
+          echo '  - files:' >> .github/sync.yml
+          for item in $SYNC; do
+            echo "    - source: ${sync}/${item}" >> .github/sync.yml
+            echo "      dest: $item" >> .github/sync.yml
+          done
+          #echo '    - .github/workflows/add-stars.yml' >> .github/sync.yml
+          echo '    repos: |' >> .github/sync.yml
+          echo "      ${owner}/${sync}@${branch}" >> .github/sync.yml
+
+      - name: 🛰️ extract-strings.yml
+        run: |
+          echo '' >> .github/sync.yml
+          echo '  - files:' >> .github/sync.yml
+          echo "    - source: workflows/extract-strings.yml" >> .github/sync.yml
+          echo "      dest: .github/workflows/extract-strings.yml" >> .github/sync.yml
+          echo '    repos: |' >> .github/sync.yml
+          echo "      am-community/AM@main" >> .github/sync.yml
+
+      - name: 🛰️ LICENSE
+        run: |
+          echo '' >> .github/sync.yml
+          echo '  - files:' >> .github/sync.yml
+          echo "    - source: LICENSE" >> .github/sync.yml
+          echo "      dest: LICENSE" >> .github/sync.yml
+          echo '    repos: |' >> .github/sync.yml
+          echo "      am-community/.github@main" >> .github/sync.yml
+          echo "      am-community/localization@main" >> .github/sync.yml
+          echo "      am-community/workflows@main" >> .github/sync.yml
+          echo "      am-community/checks@main" >> .github/sync.yml
+
+      - name: 🛰️ push
+        run: |
+          git config --global user.name web-flow
+          git config --global user.email "noreply@github.com"
+          git add .github/sync.yml
+          git commit -m "🛰️ sync" || echo "🛰️ nothing to commit" >> $GITHUB_STEP_SUMMARY
+          git push || echo "🛰️ nothing to push" >> $GITHUB_STEP_SUMMARY
+          cat .github/sync.yml >> $GITHUB_STEP_SUMMARY
+
+      - name: 🛰️ Sync
+        uses: BetaHuhn/repo-file-sync-action@v1
+        with:
+          GH_PAT: ${{ secrets.TOKEN }}
+          BRANCH_PREFIX: ''
+          SKIP_PR: true
+          ORIGINAL_MESSAGE: true
