@@ -180,7 +180,7 @@ sed() {
 ################################################################################################################################################################
 
 # "APPMAN" CORE VARIABLES AND FUNCTIONS
-APPMAN_SETUP_MSG="Before proceeding with any task, where do you want to install apps?
+APPMAN_SETUP_MSG=$(echo $"Before proceeding with any task, where do you want to install apps?
 
 SYNTAX: /FULLPATH/TO/DIRNAME
 EXAMPLE: $HOME/My-apps
@@ -188,7 +188,7 @@ EXAMPLE: $HOME/My-apps
 NOTE: Any spaces in the path will be replaced for dashes
 NOTE: If no input is given then \"~/Applications\" will be used as default
 
-if you wish to later change the location, first remove all the programs and then edit the \"$APPMANCONFIG/appman-config\" file."
+if you wish to later change the location, first remove all the programs and then edit the \"$APPMANCONFIG/appman-config\" file.")
 
 _appman_check() {
 	if [ ! -f "$APPMANCONFIG"/appman-config ]; then
@@ -549,7 +549,7 @@ if [ -n "$third_party_flags" ]; then
 for flag in $third_party_flags; do
 tpflag_name=$(echo "$flag" | tr '-' '\n ' | grep .)
 tprepo_name="${tpflag_name}_repo"
-third_party_flags_message="$third_party_flags_message\n
+third_party_flags_message=$( echo -e $"$third_party_flags_message\n
 ${Gold}--$tpflag_name\033[0m
 
 	${LightBlue}$AMCLI -i --$tpflag_name {PROGRAM}\033[0m
@@ -557,7 +557,7 @@ ${Gold}--$tpflag_name\033[0m
 	${LightBlue}$AMCLI -l --$tpflag_name\033[0m
 
 Description: This is a flag to use in \"-i\" and \"-l\" to install/list ${tpflag_name^}s from ${!tprepo_name}. You can also use it in \"-q\" as a keyword. For installations you can use .$tpflag_name as the package extension instead of using the flag.
-"
+")
 done
 fi
 
@@ -815,9 +815,9 @@ _update_github_api_key_in_the_updater_files() {
 #				APPMAN MODE
 ################################################################################################################################################################
 
-APPMAN_MSG="$DIVIDING_LINE\n \"AM\" is running as \"AppMan\", use ${Green}am --system\033[0m to switch it back to \"AM\"\n$DIVIDING_LINE\n"
-APPMAN_MSG_OFF="$DIVIDING_LINE\n \"AppMan Mode\" disabled! \n$DIVIDING_LINE\n"
-APPMAN_MSG_THINK="$DIVIDING_LINE\nNOTE: You can also choose to simply use \"--user\" as a flag to install apps locally (options \"-i\", \"-ia\" and \"-e\") instead of going fully into \"AppMan Mode\". \"AM\" can  handle local applications as well.\n$DIVIDING_LINE\n"
+APPMAN_MSG=$(echo -e $"$DIVIDING_LINE\n \"AM\" is running as \"AppMan\", use ${Green}am --system\033[0m to switch it back to \"AM\"\n$DIVIDING_LINE\n")
+APPMAN_MSG_OFF=$(echo -e $"$DIVIDING_LINE\n \"AppMan Mode\" disabled! \n$DIVIDING_LINE\n")
+APPMAN_MSG_THINK=$(echo -e $"$DIVIDING_LINE\nNOTE: You can also choose to simply use \"--user\" as a flag to install apps locally (options \"-i\", \"-ia\" and \"-e\") instead of going fully into \"AppMan Mode\". \"AM\" can  handle local applications as well.\n$DIVIDING_LINE\n")
 
 _use_appman() {
 	_online_check
