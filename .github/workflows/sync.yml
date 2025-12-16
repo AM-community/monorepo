@@ -34,12 +34,12 @@ jobs:
 
       - name: Add upstream as remote
         run: |
-          git remote add AM https://github.com/ivan-hc/am
+          git remote add AM https://github.com/ivan-hc/AM
           git fetch --no-write-fetch-head AM
 
       - name: Sync dev-AM with upstream
         run: |
-          git branch --set-upstream-to=AM/dev
+          git branch --set-upstream-to=AM/dev dev-AM
           git pull --no-edit
 
       - name: Checkout main-AM
@@ -57,10 +57,14 @@ jobs:
         uses: actions/checkout@main
         with:
           repository: am-community/am
+
       - name: clean
         run: |
-          rm -rf *
-          git add .
+          rm -rf am
+          git clone https://github.com/ivan-hc/AM.git am
+          cd am
+          git checkout main
+          cd ..
 
       - name: Checkout .github
         uses: actions/checkout@main
@@ -189,6 +193,7 @@ jobs:
           git config --global user.name web-flow
           git config --global user.email "noreply@github.com"
           git add .github/sync.yml
+          git add am
           git commit -m "🛰️ sync" || echo "🛰️ nothing to commit" >> $GITHUB_STEP_SUMMARY
           git push || echo "🛰️ nothing to push" >> $GITHUB_STEP_SUMMARY
           cat .github/sync.yml >> $GITHUB_STEP_SUMMARY
