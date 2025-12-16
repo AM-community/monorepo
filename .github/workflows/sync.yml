@@ -66,20 +66,10 @@ jobs:
       - name: Checkout monorepo
         uses: actions/checkout@main
 
-      - name: Install git-subrepo
-        run: |
-          git clone https://github.com/ingydotnet/git-subrepo
-          cd git-subrepo
-          sudo make install
-          source .rc
-          cd ..
-
       - name: Update AM
         run: |
-          #cd ..
           echo "$(pwd)"
-          /usr/lib/git-core/git-subrepo pull --force --method rebase am
-          git push # origin mono
+          git subtree pull --prefix=am https://github.com/ivan-hc/AM main
 
       - name: Checkout .github
         uses: actions/checkout@main
