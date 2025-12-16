@@ -62,8 +62,6 @@ group:
       dest: source.pot
     - source: localization/sr.po
       dest: sr.po
-    - source: localization/usr
-      dest: usr
     repos: |
       am-community/localization@main
 
