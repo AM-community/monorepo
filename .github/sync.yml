@@ -18,6 +18,10 @@ group:
       dest: appimage-bulder-scripts
     - source: am/docs
       dest: docs
+    - source: am/logo.png
+      dest: logo.png
+    - source: am/logo.svg
+      dest: logo.svg
     - source: am/modules
       dest: modules
     - source: am/programs
