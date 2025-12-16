@@ -1,3 +1,9 @@
+ivan-hc/AM:
+  - source: ./
+    dest: am/
+    repos: |
+      am-community/am@mono
+
 group:
   - files:
     - source: am/AM-INSTALLER
