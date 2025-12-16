@@ -96,6 +96,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@main
 
+      - name: 🛰️ upstream AM
+        run: |
+          sync=am
+          #syncD=am
+          branch=main
+          owner=ivan-hc
+          SYNC=$(ls ./)
+          echo "$SYNC"
+          echo 'group:' > .github/sync.yml
+          echo '  - files:' >> .github/sync.yml
+          for item in $SYNC; do
+            echo "    - source: ${item}" >> .github/sync.yml
+            echo "      dest: ${sync}/$item" >> .github/sync.yml
+          done
+          #echo '    - .github/workflows/add-stars.yml' >> .github/sync.yml
+          echo '    repos: |' >> .github/sync.yml
+          # Here use sync or syncD variable
+          echo "      ${owner}/${sync}@${branch}" >> .github/sync.yml
+
       - name: 🛰️ am
         run: |
           sync=am
@@ -104,7 +123,8 @@ jobs:
           owner=am-community
           SYNC=$(ls ${sync}/)
           echo "$SYNC"
-          echo 'group:' > .github/sync.yml
+          echo '' >> .github/sync.yml
+          echo 'group:' >> .github/sync.yml
           echo '  - files:' >> .github/sync.yml
           for item in $SYNC; do
             echo "    - source: ${sync}/${item}" >> .github/sync.yml
@@ -199,7 +219,8 @@ jobs:
           cat .github/sync.yml >> $GITHUB_STEP_SUMMARY
 
       - name: 🛰️ Sync
-        uses: BetaHuhn/repo-file-sync-action@v1
+        #uses: BetaHuhn/repo-file-sync-action@v1
+        uses: PaddleHQ/repo-file-sync-action@v1
         with:
           GH_PAT: ${{ secrets.TOKEN }}
           BRANCH_PREFIX: ''
