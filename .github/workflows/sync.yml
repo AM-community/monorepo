@@ -69,7 +69,8 @@ jobs:
       - name: Update AM
         run: |
           echo "$(pwd)"
-          git subtree pull --prefix=am https://github.com/ivan-hc/AM main
+          git log --graph --decorate --oneline
+          git subtree pull --prefix=am https://github.com/ivan-hc/AM main --allow-unrelated-histories
 
       - name: Checkout .github
         uses: actions/checkout@main
