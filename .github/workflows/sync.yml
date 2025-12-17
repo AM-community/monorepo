@@ -70,7 +70,7 @@ jobs:
         run: |
           echo "$(pwd)"
           git log --graph --decorate --oneline
-          git subtree pull --prefix=am https://github.com/ivan-hc/AM main --allow-unrelated-histories
+          git subtree pull --prefix=am https://github.com/ivan-hc/AM main
 
       - name: Checkout .github
         uses: actions/checkout@main
